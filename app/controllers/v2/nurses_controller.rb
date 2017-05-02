@@ -1,4 +1,4 @@
-module V1
+module V2
   class NursesController < ApplicationController
     before_action :set_nurse, only: [:show, :update, :destroy]
 
@@ -6,12 +6,12 @@ module V1
     def index
       @nurses = Nurse.all
 
-      render json: @nurses, each_serializer: V1::NurseSerializer
+      render json: @nurses, each_serializer: V2::NurseSerializer
     end
 
     # GET /nurses/1
     def show
-      render json: @nurse, each_serializer: V1::NurseSerializer
+      render json: @nurse, each_serializer: V2::NurseSerializer
     end
 
     # POST /nurses
@@ -19,7 +19,7 @@ module V1
       @nurse = Nurse.new(nurse_params)
 
       if @nurse.save
-        render json: @nurse, status: :created, location: v1_nurse_appointment_path(@nurse.id)
+        render json: @nurse, status: :created, location: v2_nurse_appointment_path(@nurse.id)
       else
         render json: @nurse.errors, status: :unprocessable_entity
       end
